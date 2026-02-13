@@ -17,7 +17,12 @@ export const metadata: Metadata = {
     description: "L'EDA moderno per team che non hanno tempo da perdere.",
     type: "website",
   },
+  icons: {
+    icon: "/Logo_sfondo.png",
+  },
 };
+
+import { LanguageProvider } from '@/i18n/LanguageContext';
 
 export default function RootLayout({
   children,
@@ -25,10 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className="dark">
-      <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
-      </body>
-    </html>
+    <LanguageProvider>
+      <html className="dark">
+        <body className={`${inter.variable} font-sans antialiased`}>
+          {children}
+        </body>
+      </html>
+    </LanguageProvider>
   );
 }

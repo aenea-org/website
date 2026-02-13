@@ -1,8 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslation } from '@/i18n/LanguageContext';
 
 export default function Footer() {
+    const { t } = useTranslation();
+
     return (
         <footer className="py-16 relative overflow-hidden">
             {/* Top Border Glow */}
@@ -19,7 +22,7 @@ export default function Footer() {
                         <div className="flex items-center gap-3 mb-4">
                             <div className="relative w-10 h-10">
                                 <Image
-                                    src="/Logo_no_sfondo.png"
+                                    src="/logo.png"
                                     alt="AENEA"
                                     fill
                                     className="object-contain"
@@ -28,7 +31,7 @@ export default function Footer() {
                             <span className="text-xl font-bold">AENEA</span>
                         </div>
                         <p className="text-sm text-[#888] mb-6">
-                            Designed for engineers.
+                            {t.footer.tagline}
                         </p>
                         {/* Social Links */}
                         <div className="flex gap-3">
@@ -59,16 +62,16 @@ export default function Footer() {
 
                     {/* Prodotto */}
                     <div>
-                        <h4 className="text-sm font-semibold mb-5 text-white">Prodotto</h4>
+                        <h4 className="text-sm font-semibold mb-5 text-white">{t.footer.product}</h4>
                         <ul className="space-y-3">
                             <li>
                                 <a href="#soluzione" className="text-sm text-[#888] hover:text-[#3b82f6] transition-colors duration-300">
-                                    Funzionalità
+                                    {t.footer.features}
                                 </a>
                             </li>
                             <li>
                                 <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#888] hover:text-[#3b82f6] transition-colors duration-300">
-                                    Demo
+                                    {t.footer.demo}
                                 </a>
                             </li>
                         </ul>
@@ -76,16 +79,16 @@ export default function Footer() {
 
                     {/* Azienda */}
                     <div>
-                        <h4 className="text-sm font-semibold mb-5 text-white">Azienda</h4>
+                        <h4 className="text-sm font-semibold mb-5 text-white">{t.footer.company}</h4>
                         <ul className="space-y-3">
                             <li>
                                 <a href="#team" className="text-sm text-[#888] hover:text-[#3b82f6] transition-colors duration-300">
-                                    Team
+                                    {t.nav.team}
                                 </a>
                             </li>
                             <li>
                                 <a href="#filosofia" className="text-sm text-[#888] hover:text-[#3b82f6] transition-colors duration-300">
-                                    Filosofia
+                                    {t.nav.philosophy}
                                 </a>
                             </li>
                         </ul>
@@ -93,7 +96,7 @@ export default function Footer() {
 
                     {/* Contatti */}
                     <div>
-                        <h4 className="text-sm font-semibold mb-5 text-white">Contatti</h4>
+                        <h4 className="text-sm font-semibold mb-5 text-white">{t.footer.contact}</h4>
                         <ul className="space-y-3">
                             <li>
                                 <a
@@ -113,11 +116,11 @@ export default function Footer() {
                 {/* Bottom Section */}
                 <div className="pt-8 border-t border-[#222] flex flex-col md:flex-row justify-between items-center gap-4">
                     <div className="text-sm text-[#555]">
-                        © {new Date().getFullYear()} AENEA. All rights reserved.
+                        {t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}
                     </div>
                     <div className="text-sm text-[#555] flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]" />
-                        Designed for engineers.
+                        {t.footer.tagline}
                     </div>
                 </div>
             </div>

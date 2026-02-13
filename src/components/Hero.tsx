@@ -1,8 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslation } from '@/i18n/LanguageContext';
 
 export default function Hero() {
+    const { t } = useTranslation();
+
     return (
         <section className="min-h-screen flex items-center pt-16 relative overflow-hidden">
             {/* Animated Background Mesh */}
@@ -23,22 +26,20 @@ export default function Hero() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3b82f6] opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3b82f6]"></span>
                             </span>
-                            Modern EDA Platform
+                            {t.hero.badge}
                         </div>
 
                         {/* Headline */}
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6 animate-fade-in-up animate-delay-100">
-                            Progettare Hardware{' '}
+                            {t.hero.headline}{' '}
                             <span className="gradient-text">
-                                alla velocità del Software.
+                                {t.hero.headlineAccent}
                             </span>
                         </h1>
 
                         {/* Subtitle */}
                         <p className="text-lg md:text-xl text-[#888] leading-relaxed max-w-lg mb-10 animate-fade-in-up animate-delay-200">
-                            L&apos;EDA moderno per team che non hanno tempo da perdere. AENEA rimuove
-                            la complessità dei tool tradizionali e ti permette di passare
-                            dall&apos;idea al design in minuti, non giorni.
+                            {t.hero.subtitle}
                         </p>
 
                         {/* CTAs */}
@@ -49,7 +50,7 @@ export default function Hero() {
                                 rel="noopener noreferrer"
                                 className="group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium bg-gradient-to-r from-[#3b82f6] to-[#2563eb] hover:from-[#2563eb] hover:to-[#1d4ed8] rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-glow-lg"
                             >
-                                <span>Richiedi una Demo</span>
+                                <span>{t.hero.ctaPrimary}</span>
                                 <svg
                                     className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                                     fill="none"
@@ -68,7 +69,7 @@ export default function Hero() {
                                 href="#soluzione"
                                 className="group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium bg-transparent border border-[#333] hover:border-[#3b82f6]/50 hover:bg-[#161616] rounded-xl transition-all duration-300"
                             >
-                                <span>Come funziona</span>
+                                <span>{t.hero.ctaSecondary}</span>
                                 <svg
                                     className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5"
                                     fill="none"

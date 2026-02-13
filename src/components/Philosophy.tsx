@@ -2,6 +2,7 @@
 
 import ScrollReveal from './ScrollReveal';
 import { useEffect, useState, useRef } from 'react';
+import { useTranslation } from '@/i18n/LanguageContext';
 
 interface CountUpProps {
     end: number;
@@ -49,7 +50,11 @@ function CountUp({ end, suffix = '', duration = 2000 }: CountUpProps) {
     return <div ref={ref}>{count}{suffix}</div>;
 }
 
+const statValues = [10, 0, 100];
+
 export default function Philosophy() {
+    const { t } = useTranslation();
+
     return (
         <section id="filosofia" className="py-24 md:py-32 relative overflow-hidden">
             {/* Background */}
@@ -66,12 +71,12 @@ export default function Philosophy() {
                     {/* Header */}
                     <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#3b82f6] mb-4">
                         <span className="w-8 h-px bg-gradient-to-r from-transparent to-[#3b82f6]" />
-                        la filosofia
+                        {t.philosophy.tag}
                         <span className="w-8 h-px bg-gradient-to-l from-transparent to-[#3b82f6]" />
                     </span>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-12">
-                        L&apos;approccio{' '}
-                        <span className="gradient-text-blue">AENEA.</span>
+                        {t.philosophy.title}{' '}
+                        <span className="gradient-text-blue">{t.philosophy.titleAccent}</span>
                     </h2>
 
                     {/* Quote */}
@@ -85,46 +90,31 @@ export default function Philosophy() {
                         </div>
 
                         <blockquote className="text-xl md:text-2xl lg:text-3xl font-normal leading-relaxed text-[#e0e0e0]">
-                            La complessità dei chip aumenta, ma gli strumenti per disegnarli
-                            sono rimasti indietro. La nostra filosofia è semplice:{' '}
+                            {t.philosophy.quote}{' '}
                             <strong className="text-[#3b82f6] font-semibold">
-                                l&apos;automazione deve gestire i dettagli di basso livello,
-                                l&apos;ingegnere deve gestire l&apos;intenzione di alto livello.
+                                {t.philosophy.quoteAccent}
                             </strong>
                         </blockquote>
                     </div>
 
                     {/* Subtitle */}
                     <p className="text-base md:text-lg text-[#888] leading-relaxed max-w-2xl mx-auto">
-                        Non stiamo reinventando l&apos;elettronica.
-                        Stiamo ottimizzando il modo in cui viene costruita.{' '}
-                        <span className="text-[#aaa]">Less scripting, more designing.</span>
+                        {t.philosophy.subtitle}{' '}
+                        <span className="text-[#aaa]">{t.philosophy.subtitleAccent}</span>
                     </p>
                 </ScrollReveal>
 
                 {/* Stats */}
                 <ScrollReveal delay={200}>
                     <div className="mt-20 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
-                        <div className="flex flex-col items-center p-6 rounded-2xl bg-gradient-to-b from-[#161616] to-transparent border border-[#222]">
-                            <div className="text-4xl md:text-5xl font-bold gradient-text-blue mb-2">
-                                <CountUp end={10} suffix="×" />
+                        {t.philosophy.stats.map((stat, index) => (
+                            <div key={index} className="flex flex-col items-center p-6 rounded-2xl bg-gradient-to-b from-[#161616] to-transparent border border-[#222]">
+                                <div className="text-4xl md:text-5xl font-bold gradient-text-blue mb-2">
+                                    <CountUp end={statValues[index]} suffix={stat.suffix} />
+                                </div>
+                                <div className="text-xs md:text-sm text-[#666]">{stat.label}</div>
                             </div>
-                            <div className="text-xs md:text-sm text-[#666]">Iterazioni più veloci</div>
-                        </div>
-
-                        <div className="flex flex-col items-center p-6 rounded-2xl bg-gradient-to-b from-[#161616] to-transparent border border-[#222]">
-                            <div className="text-4xl md:text-5xl font-bold gradient-text-blue mb-2">
-                                <CountUp end={0} />
-                            </div>
-                            <div className="text-xs md:text-sm text-[#666]">Setup richiesto</div>
-                        </div>
-
-                        <div className="flex flex-col items-center p-6 rounded-2xl bg-gradient-to-b from-[#161616] to-transparent border border-[#222]">
-                            <div className="text-4xl md:text-5xl font-bold gradient-text-blue mb-2">
-                                <CountUp end={100} suffix="%" />
-                            </div>
-                            <div className="text-xs md:text-sm text-[#666]">Output standard</div>
-                        </div>
+                        ))}
                     </div>
                 </ScrollReveal>
             </div>

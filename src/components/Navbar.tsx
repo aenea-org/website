@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from '@/i18n/LanguageContext';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -39,18 +42,18 @@ export default function Navbar() {
     }, [mobileMenuOpen]);
 
     const navLinks = [
-        { href: '#problema', label: 'Il Problema' },
-        { href: '#soluzione', label: 'Soluzione' },
-        { href: '#filosofia', label: 'Filosofia' },
-        { href: '#team', label: 'Team' },
+        { href: '#problema', label: t.nav.problem },
+        { href: '#soluzione', label: t.nav.solution },
+        { href: '#filosofia', label: t.nav.philosophy },
+        { href: '#team', label: t.nav.team },
     ];
 
     return (
         <>
             <nav
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                        ? 'glass-strong shadow-lg'
-                        : 'bg-transparent'
+                    ? 'glass-strong shadow-lg'
+                    : 'bg-transparent'
                     }`}
             >
                 <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -58,7 +61,7 @@ export default function Navbar() {
                     <a href="#" className="relative flex items-center gap-2 group">
                         <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-105">
                             <Image
-                                src="/Logo_no_sfondo.png"
+                                src="/logo.png"
                                 alt="AENEA"
                                 fill
                                 className="object-contain"
@@ -84,28 +87,31 @@ export default function Navbar() {
                         ))}
                     </div>
 
-                    {/* Desktop CTA */}
-                    <a
-                        href="https://calendly.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-[#3b82f6] to-[#2563eb] hover:from-[#2563eb] hover:to-[#1d4ed8] rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow"
-                    >
-                        <span>Richiedi Demo</span>
-                        <svg
-                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                    {/* Desktop Right Side */}
+                    <div className="hidden md:flex items-center gap-4">
+                        <LanguageSwitcher />
+                        <a
+                            href="https://calendly.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-[#3b82f6] to-[#2563eb] hover:from-[#2563eb] hover:to-[#1d4ed8] rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                        </svg>
-                    </a>
+                            <span>{t.nav.cta}</span>
+                            <svg
+                                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                />
+                            </svg>
+                        </a>
+                    </div>
 
                     {/* Mobile Menu Button */}
                     <button
@@ -154,6 +160,10 @@ export default function Navbar() {
                         ))}
                     </nav>
 
+                    <div className="mt-8">
+                        <LanguageSwitcher />
+                    </div>
+
                     <div className="mt-auto pb-8">
                         <a
                             href="https://calendly.com"
@@ -162,7 +172,7 @@ export default function Navbar() {
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-center justify-center gap-2 w-full px-6 py-3.5 text-sm font-medium bg-gradient-to-r from-[#3b82f6] to-[#2563eb] rounded-lg"
                         >
-                            Richiedi Demo
+                            {t.nav.cta}
                             <svg
                                 className="w-4 h-4"
                                 fill="none"

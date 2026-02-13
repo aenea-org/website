@@ -2,29 +2,13 @@
 
 import ScrollReveal from './ScrollReveal';
 import Image from 'next/image';
+import { useTranslation } from '@/i18n/LanguageContext';
 
-const team = [
-    {
-        name: "Alessandro",
-        role: "CTO",
-        bio: "ML Engineer. Si occupa dell'infrastruttura di machine learning e dell'architettura tecnica.",
-        image: "/alessandro_icon.png"
-    },
-    {
-        name: "Filippo",
-        role: "CEO",
-        bio: "Visione strategica e sviluppo business. Guida la crescita aziendale e le partnership.",
-        image: "/filippo_icon.png"
-    },
-    {
-        name: "Marco",
-        role: "CPO",
-        bio: "PhD in Elettronica. Trasforma la ricerca accademica in soluzioni pratiche per ingegneri.",
-        image: "/marco_icon.png"
-    }
-];
+const memberImages = ['/alessandro_icon.png', '/filippo_icon.png', '/marco_icon.png'];
 
 export default function Team() {
+    const { t } = useTranslation();
+
     return (
         <section id="team" className="py-24 md:py-32 relative overflow-hidden">
             {/* Background Glow */}
@@ -36,24 +20,22 @@ export default function Team() {
                     <div className="text-center mb-16">
                         <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#3b82f6] mb-4">
                             <span className="w-8 h-px bg-gradient-to-r from-transparent to-[#3b82f6]" />
-                            il team
+                            {t.team.tag}
                             <span className="w-8 h-px bg-gradient-to-l from-transparent to-[#3b82f6]" />
                         </span>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-                            Chi{' '}
-                            <span className="gradient-text-blue">siamo.</span>
+                            {t.team.title}{' '}
+                            <span className="gradient-text-blue">{t.team.titleAccent}</span>
                         </h2>
                         <p className="text-lg text-[#888] max-w-2xl mx-auto">
-                            Siamo ingegneri, ricercatori e progettisti. Abbiamo vissuto in prima
-                            persona i limiti dei software EDA tradizionali e abbiamo costruito
-                            lo strumento che avremmo sempre voluto usare.
+                            {t.team.subtitle}
                         </p>
                     </div>
                 </ScrollReveal>
 
                 {/* Team Cards */}
                 <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                    {team.map((member, index) => (
+                    {t.team.members.map((member, index) => (
                         <ScrollReveal key={index} delay={index * 100}>
                             <div className="group h-full card-premium p-8 text-center hover:border-[#3b82f6]/30">
                                 {/* Avatar with Ring */}
@@ -69,7 +51,7 @@ export default function Team() {
                                     {/* Image */}
                                     <div className="absolute inset-[3px] rounded-full overflow-hidden">
                                         <Image
-                                            src={member.image}
+                                            src={memberImages[index]}
                                             alt={member.name}
                                             fill
                                             className="object-cover transition-transform duration-500 group-hover:scale-105"
